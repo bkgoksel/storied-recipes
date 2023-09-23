@@ -22,15 +22,15 @@ document.addEventListener("DOMContentLoaded", function() {
             lastSentences = newStoryPiece.split(' ').slice(-50).join(' ');
 
         } catch (err) {
-            console.error('Error fetching the next story piece:', err);
+            console.error('Error fetching the next story piece:', err.message);
         }
     }
 
     function onScroll() {
         const containerBottom = storyContainer.getBoundingClientRect().bottom;
 
-        if (containerBottom <= window.innerHeight + 300) {
-	    document.body.classList.add('no-scroll');  // Disable scrolling before the API call
+        if (containerBottom <= window.innerHeight + 500) {
+            document.body.classList.add('no-scroll');  // Disable scrolling before the API call
             fetchAndAppendStory();
             document.body.classList.remove('no-scroll');  // Re-enable scrolling after appending the story
         }
@@ -51,6 +51,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Using the debounce function to limit how often onScroll can be called
-    window.onscroll = debounce(onScroll, 250);
+    window.onscroll = onScroll;
 });
 
