@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const storyContainer = document.getElementById('recipe-body');
     const API_ENDPOINT = 'https://storied-recipes.netlify.app/.netlify/functions/generate-story';
-    let lastSentences = '';
+    let lastSentences = storyContainer.innerText.split(' ').slice(-50).join(' ');
 
     async function fetchAndAppendStory() {
 
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const newStoryPiece = data.story.trim();
 
             storyContainer.innerHTML += newStoryPiece;
-            lastSentences = newStoryPiece.split(' ').slice(-20).join(' ');
+            lastSentences = newStoryPiece.split(' ').slice(-50).join(' ');
 
         } catch (err) {
             console.error('Error fetching the next story piece:', err);
