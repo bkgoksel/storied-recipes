@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const storyContainer = document.getElementById('infinite-story');
+    const storyContainer = document.getElementById('recipe-body');
     const API_ENDPOINT = 'https://storied-recipes.netlify.app/.netlify/functions/generate-story';
     let lastSentences = '';
 
