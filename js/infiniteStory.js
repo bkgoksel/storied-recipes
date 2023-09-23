@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const storyContainer = document.getElementById('recipe-body');
-    const API_ENDPOINT = 'https://storied-recipes.netlify.app/functions/generate-story';
+    const storyContainer = document.getElementById('infinite-story');
+    const API_ENDPOINT = 'https://storied-recipes.netlify.app/.netlify/functions/generate-story';
     let lastSentences = '';
 
     async function fetchAndAppendStory() {
+        document.body.classList.add('no-scroll');  // Disable scrolling before the API call
+
         try {
             const recipeName = document.title;
             const response = await fetch(API_ENDPOINT, {
@@ -23,10 +25,14 @@ document.addEventListener("DOMContentLoaded", function() {
         } catch (err) {
             console.error('Error fetching the next story piece:', err);
         }
+
+        document.body.classList.remove('no-scroll');  // Re-enable scrolling after appending the story
     }
 
     function onScroll() {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+        const containerBottom = storyContainer.getBoundingClientRect().bottom;
+
+        if (containerBottom <= window.innerHeight + 500) {
             fetchAndAppendStory();
         }
     }
@@ -46,6 +52,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Using the debounce function to limit how often onScroll can be called
-    window.onscroll = debounce(onScroll, 250);  // Waits 250ms after the last scroll event before executing the function
+    window.onscroll = debounce(onScroll, 250);
 });
 

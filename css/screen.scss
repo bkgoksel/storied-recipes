@@ -10,3 +10,8 @@
 @import "recipes";
 @import "cloudcannon";
 @import "pinterest";
+
+.no-scroll {
+    overflow: hidden;
+    height: 100%;
+}
