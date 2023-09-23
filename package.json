@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@netlify/functions": "^2.0.2",
-    "openai": "^4.10.0"
-  }
-}
