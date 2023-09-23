@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let lastSentences = '';
 
     async function fetchAndAppendStory() {
-        document.body.classList.add('no-scroll');  // Disable scrolling before the API call
 
         try {
             const recipeName = document.title;
@@ -20,20 +19,20 @@ document.addEventListener("DOMContentLoaded", function() {
             const newStoryPiece = data.story.trim();
 
             storyContainer.innerHTML += newStoryPiece;
-            lastSentences = newStoryPiece.split(' ').slice(-50).join(' ');
+            lastSentences = newStoryPiece.split(' ').slice(-20).join(' ');
 
         } catch (err) {
             console.error('Error fetching the next story piece:', err);
         }
-
-        document.body.classList.remove('no-scroll');  // Re-enable scrolling after appending the story
     }
 
     function onScroll() {
         const containerBottom = storyContainer.getBoundingClientRect().bottom;
 
-        if (containerBottom <= window.innerHeight + 500) {
+        if (containerBottom <= window.innerHeight + 300) {
+	    document.body.classList.add('no-scroll');  // Disable scrolling before the API call
             fetchAndAppendStory();
+            document.body.classList.remove('no-scroll');  // Re-enable scrolling after appending the story
         }
     }
 
