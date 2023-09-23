@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
 
             const data = await response.json();
-            const newStoryPiece = data.choices[0].text.trim();
+            const newStoryPiece = data.story.trim();
 
             storyContainer.innerHTML += newStoryPiece;
             lastSentences = newStoryPiece.split(' ').slice(-50).join(' ');
