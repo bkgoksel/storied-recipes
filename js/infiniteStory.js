@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const storyContainer = document.getElementById('recipe-body');
-    const API_ENDPOINT = 'https://storied-recipes.netlify.app/.netlify/functions/generate-story';
+    const API_ENDPOINT = 'https://storied-recipes-backend.azurewebsites.net/api/generate_story';
     let lastSentences = storyContainer.innerText.split(' ').slice(-50).join(' ');
 
     async function fetchAndAppendStory() {
@@ -51,6 +51,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Using the debounce function to limit how often onScroll can be called
-    window.onscroll = onScroll;
+    window.onscroll = debounce(onScroll, 50);
 });
 
