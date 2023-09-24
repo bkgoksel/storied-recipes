@@ -3,8 +3,8 @@ email: bkgoksel@gmail.com
 description: >- 
   Storied recipes from Kerem Goksel. Each recipe has a story as unique
   as the ingredients that go into it!
-baseurl: "/storied-recipes" # the subpath of your site, e.g. /blog
-url: "https://bkgoksel.github.io"
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://storied.recipes"
 twitter_username: go_kerem_go
 github_username: bkgoksel
 
