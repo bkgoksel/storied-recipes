@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.body.classList.remove('no-scroll');  // Re-enable scrolling after appending the story
     }
 
-    const debouncedFetch = debounce(fetchAndAppendStory, 100);
+    const debouncedFetch = debounce(fetchAndAppendStory, 500);
 
     function onScroll() {
         const containerBottom = storyContainer.getBoundingClientRect().bottom;
