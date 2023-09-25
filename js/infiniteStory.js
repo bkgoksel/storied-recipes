@@ -2,7 +2,8 @@ document.addEventListener('wheel', function(e) {
   if (document.body.classList.contains("no-scroll")) {
     e.preventDefault()
   }
-  if (containerBottom <= window.innerHeight - 50) {
+  const storyContainer = document.getElementById('recipe-body');
+  if (storyContainer.getBoundingClientRect().bottom<= window.innerHeight - 50) {
       debouncedFetch();
   } else {
     // Determine the direction of the scroll (+ve is down, -ve is up)
@@ -25,8 +26,8 @@ document.addEventListener('touchmove', function(e) {
     if (document.body.classList.contains("no-scroll")) {
       e.preventDefault()
     }
-    const containerBottom = storyContainer.getBoundingClientRect().bottom;
-    if (containerBottom <= window.innerHeight - 50) {
+    const storyContainer = document.getElementById('recipe-body');
+    if (storyContainer.getBoundingClientRect().bottom <= window.innerHeight - 50) {
         debouncedFetch();
     } else {
       // Calculate the distance moved
