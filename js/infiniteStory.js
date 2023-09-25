@@ -37,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function onScroll() {
         const containerBottom = storyContainer.getBoundingClientRect().bottom;
         if (containerBottom <= window.innerHeight - 50) {
+            console.log("Scrolled to bottom, story time")
             debouncedFetch();
         }
     }
@@ -62,15 +63,15 @@ document.addEventListener("DOMContentLoaded", function() {
       if (document.body.classList.contains("no-scroll")) {
         e.preventDefault()
       }
-      const storyContainer = document.getElementById('recipe-body');
-      if (storyContainer.getBoundingClientRect().bottom<= window.innerHeight - 50) {
+      if (storyContainer.getBoundingClientRect().bottom <= window.innerHeight - 50) {
+          console.log("Wheeled to bottom, story time")
           debouncedFetch();
       } else {
         // Determine the direction of the scroll (+ve is down, -ve is up)
         const delta = e.deltaY > 0 ? 1 : -1;
 
         // Scroll the page by a fraction of the delta (in this case, 30%)
-        window.scrollBy(0, delta * 0.8);
+        window.scrollBy(0, delta * 0.9);
       }
       // Prevent the default behavior to effectively replace it with our custom scrolling
       e.preventDefault();
@@ -86,15 +87,15 @@ document.addEventListener("DOMContentLoaded", function() {
         if (document.body.classList.contains("no-scroll")) {
           e.preventDefault()
         }
-        const storyContainer = document.getElementById('recipe-body');
         if (storyContainer.getBoundingClientRect().bottom <= window.innerHeight - 50) {
+            console.log("Touched to bottom, story time")
             debouncedFetch();
         } else {
           // Calculate the distance moved
           const deltaY = e.touches[0].pageY - startY;
 
           // Slow down the scroll (in this case, we'll move by half of the touch distance)
-          window.scrollBy(0, deltaY * -0.7);
+          window.scrollBy(0, deltaY * -0.9);
 
           // Update startY for the next move
           startY = e.touches[0].pageY;
