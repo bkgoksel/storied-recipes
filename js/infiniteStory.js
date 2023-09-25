@@ -1,49 +1,3 @@
-document.addEventListener('wheel', function(e) {
-  if (document.body.classList.contains("no-scroll")) {
-    e.preventDefault()
-  }
-  const storyContainer = document.getElementById('recipe-body');
-  if (storyContainer.getBoundingClientRect().bottom<= window.innerHeight - 50) {
-      debouncedFetch();
-  } else {
-    // Determine the direction of the scroll (+ve is down, -ve is up)
-    const delta = e.deltaY > 0 ? 1 : -1;
-
-    // Scroll the page by a fraction of the delta (in this case, 30%)
-    window.scrollBy(0, delta * 0.8);
-  }
-  // Prevent the default behavior to effectively replace it with our custom scrolling
-  e.preventDefault();
-}, { passive: false });
-
-let startY = 0;
-
-document.addEventListener('touchstart', function(e) {
-    startY = e.touches[0].pageY;
-}, false);
-
-document.addEventListener('touchmove', function(e) {
-    if (document.body.classList.contains("no-scroll")) {
-      e.preventDefault()
-    }
-    const storyContainer = document.getElementById('recipe-body');
-    if (storyContainer.getBoundingClientRect().bottom <= window.innerHeight - 50) {
-        debouncedFetch();
-    } else {
-      // Calculate the distance moved
-      const deltaY = e.touches[0].pageY - startY;
-
-      // Slow down the scroll (in this case, we'll move by half of the touch distance)
-      window.scrollBy(0, deltaY * -0.7);
-
-      // Update startY for the next move
-      startY = e.touches[0].pageY;
-    }
-    // Prevent default to stop native scroll
-    e.preventDefault();
-}, { passive: false });
-
-
 document.addEventListener("DOMContentLoaded", function() {
     const storyContainer = document.getElementById('recipe-body');
     const API_ENDPOINT = 'https://storied-recipes-backend.azurewebsites.net/api/generate_story';
@@ -103,5 +57,50 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Using the debounce function to limit how often onScroll can be called
     window.onscroll = onScroll;
+
+    document.addEventListener('wheel', function(e) {
+      if (document.body.classList.contains("no-scroll")) {
+        e.preventDefault()
+      }
+      const storyContainer = document.getElementById('recipe-body');
+      if (storyContainer.getBoundingClientRect().bottom<= window.innerHeight - 50) {
+          debouncedFetch();
+      } else {
+        // Determine the direction of the scroll (+ve is down, -ve is up)
+        const delta = e.deltaY > 0 ? 1 : -1;
+
+        // Scroll the page by a fraction of the delta (in this case, 30%)
+        window.scrollBy(0, delta * 0.8);
+      }
+      // Prevent the default behavior to effectively replace it with our custom scrolling
+      e.preventDefault();
+    }, { passive: false });
+
+    let startY = 0;
+
+    document.addEventListener('touchstart', function(e) {
+        startY = e.touches[0].pageY;
+    }, false);
+
+    document.addEventListener('touchmove', function(e) {
+        if (document.body.classList.contains("no-scroll")) {
+          e.preventDefault()
+        }
+        const storyContainer = document.getElementById('recipe-body');
+        if (storyContainer.getBoundingClientRect().bottom <= window.innerHeight - 50) {
+            debouncedFetch();
+        } else {
+          // Calculate the distance moved
+          const deltaY = e.touches[0].pageY - startY;
+
+          // Slow down the scroll (in this case, we'll move by half of the touch distance)
+          window.scrollBy(0, deltaY * -0.7);
+
+          // Update startY for the next move
+          startY = e.touches[0].pageY;
+        }
+        // Prevent default to stop native scroll
+        e.preventDefault();
+    }, { passive: false });
 });
 
