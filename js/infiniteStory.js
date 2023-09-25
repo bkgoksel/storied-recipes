@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     async function fetchAndAppendStory() {
         document.body.classList.add('no-scroll');  // Disable scrolling before the API call
-        console.log("Need more story!")
         while (storyContainer.getBoundingClientRect().bottom <= window.innerHeight - 50) {
+          console.log("Need more story!")
           try {
               const recipeName = document.title;
               const response = await fetch(API_ENDPOINT, {
@@ -23,12 +23,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
               storyContainer.innerHTML += newStoryPiece;
               lastSentences = newStoryPiece.split(' ').slice(-50).join(' ');
-
+              console.log("Got the story");
           } catch (err) {
               console.error('Error fetching the next story piece:', err.message);
           }
         }
-        console.log("Got the story");
+        console.log("Enough story");
         document.body.classList.remove('no-scroll');  // Re-enable scrolling after appending the story
     }
 
